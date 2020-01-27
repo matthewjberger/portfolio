@@ -74,8 +74,8 @@
                 </div>
                 <div class="col-md-8">
                     <p>
-                        I am a software engineer from Reno, Nevada currently working at Scientific Games. At home, I
-                        typically work on 3D graphics using Rust.
+                        I am a software engineer from Reno, Nevada currently working at Scientific Games on a casino game development framework. At home, I
+                        typically work on projects involving 3D graphics using Rust.
                     </p>
                 </div>
             </div>
@@ -90,58 +90,73 @@
                 <h4>Software Engineer</h4>
                 <ul>
                     <li>
-                        Resolved high-priority defects in a Unity-based production game framework by analyzing reported
-                        issues and addressing them with software updates
+                        Resolved high-priority defects in a Unity-based production casino game development framework
+                        by analyzing reported issues and addressing them with software updates.
                     </li>
                 </ul>
 
             </div>
 
-            <div data-date="October 2014 – July 2019">
+            <div data-date="December 2017 – July 2019">
                 <h3>Hamilton Robotics</h3>
                 <h4>Software Engineer</h4>
                 <ul>
                     <li>
-                        Consolidated a large robotic calibration software suite by architecting a plugin based WPF
-                        application, allowing rapid development of new features in a single application for service
-                        technicians.
+                        Rewrote a large robotic calibration software suite by creating a plugin-based application and
+                        routine development framework, which reduced the average development time of new calibration
+                        routines from two months to less than two weeks.
                     </li>
                     <li>
-                        Automated instrument validation by reverse engineering and consolidating a large software suite
-                        for gravimetric analysis into a single, modular, lightweight program compatible with all
-                        variations
-                        of the core Hamilton robots.
+                        Replaced a set of manufacturing validation tests by rewriting legacy gravimetric analysis software
+                        with a focus on automation, which decreased the time spent validating purchased robots before
+                        shipment by more than a week per robot.
                     </li>
+                    <li>
+                        Automated development environment setup by creating a Wix installer and bootstrapper that
+                        setup a virtual machine with everything needed to work on Hamilton software with only a few
+                        clicks, which reduced setup time from a day of active work to two hours of passive work.
+                    </li>
+                    <li>
+                        Implemented a robot testing workflow for Hamilton's largest OEM customer by creating a WPF
+                        application to test their robots by directly commanding the firmware, allowing the customer to
+                        rapidly find and fix a variety of issues unique to their situation
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </div>
+
+            <div data-date="May 2014 – December 2017">
+                <h3>Hamilton Robotics</h3>
+                <h4>Software Engineer (Intern)</h4>
+                <ul>
                     <li>
                         Repaired all build systems for major codebases and automated manual tasks via scripts, allowing
                         developers to build Hamilton codebases in a reproducible and continuous integration compatible
                         manner.
                     </li>
                     <li>
-                        Improved the workflow of one of Hamilton's largest OEM customers by creating a plugin-oriented
-                        service application and set of calibration routines specifically for their robots that allowed
-                        the
-                        customer to manage their robots without needing the generic core Hamilton software.
+                        Simplified development workflow by building a variety of in-house tools that saved hours of
+                        developer time for common tasks, including wrappers around firmware and scripts that simulate
+                        user software installations.
                     </li>
                     <li>
-                        Created high level C# libraries that simplified complex logic when gathering data from the
-                        software describing robotic deck layouts and using that data to execute commands on a robot.
+                        Increased the number of third-party devices supported by the core software by creating software
+                        adapters for both SILA and non-SILA compliant devices, which led to significantly more
+                        instruments being sold on the premise of being used with specific third-party devices.
                     </li>
                 </ul>
-
             </div>
+
 
             <div data-date="October 2014 – May 2016">
                 <h3>Washoe REOC</h3>
                 <h4>Database Application Developer (Contract)</h4>
                 <ul>
                     <li>
-                        Created a web-enabled, searchable database application of subject experts for use by emergency
-                        response teams.
-                    </li>
-                    <li>
-                        Architected a database and designed a graphical application using the Entity Framework for
-                        object-relational mapping
+                        Provided a way to quickly search subject matter experts in the event of a natural disaster by
+                        creating a SQL database and ASP.NET/MVC website hosted on an IIS server, which improved
+                        the response time of emergency response teams in Washoe County.
                     </li>
                 </ul>
             </div>
@@ -175,25 +190,9 @@
                     <div class="project-info">
                         <h3>Dragonglass</h3>
                         <p>
-                            A gltf scene renderer using Vulkan and written in Rust
+                            A Vulkan-powered gltf scene renderer written in Rust.
                         </p>
                         <a href="https://github.com/matthewjberger/dragonglass">View Project</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-                <!-- End .project -->
-
-                <div class="project shadow-large">
-                    <div class="project-image">
-                        <img src="images/sepia.png" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info">
-                        <h3>Sepia</h3>
-                        <p>
-                            A gltf scene renderer using OpenGL and written in Rust
-                        </p>
-                        <a href="https://github.com/matthewjberger/sepia">View Project</a>
                     </div>
                     <!-- End .project-info -->
                 </div>
@@ -210,6 +209,38 @@
                             A Rust port of the OpenGL superbible, eight edition.
                         </p>
                         <a href="https://github.com/matthewjberger/superbible">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/iceberg.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Iceberg3D</h3>
+                        <p>
+                            A small cross-platform 3D game engine, using OpenGL for rendering.
+                        </p>
+                        <a href="https://github.com/matthewjberger/Iceberg3D">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/sepia.png" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Sepia</h3>
+                        <p>
+                            A gltf scene renderer using OpenGL and written in Rust
+                        </p>
+                        <a href="https://github.com/matthewjberger/sepia">View Project</a>
                     </div>
                     <!-- End .project-info -->
                 </div>
@@ -247,22 +278,6 @@
                 </div>
                 <!-- End .project -->
 
-                <div class="project shadow-large">
-                    <div class="project-image">
-                        <img src="images/iceberg.jpg" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info">
-                        <h3>Iceberg3D</h3>
-                        <p>
-                            An early attempt at a cross-platform OpenGL-based 3D game engine.
-                        </p>
-                        <a href="https://github.com/matthewjberger/Iceberg3D">View Project</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-                <!-- End .project -->
-
             </div>
         </div>
     </div>
@@ -277,6 +292,14 @@
             <li>Rust</li>
             <li>OpenGL</li>
             <li>Vulkan</li>
+            <li>WPF</li>
+            <li>MVVM</li>
+            <li>MEF</li>
+            <li>Git</li>
+            <li>TFS</li>
+            <li>Perforce</li>
+            <li>JIRA</li>
+            <li>Confluence</li>
         </ul>
     </div>
     <!-- End #skills -->
