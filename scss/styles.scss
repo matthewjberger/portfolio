@@ -624,6 +624,21 @@ footer {
     }
 }
 
+#resume {
+    text-align: center;
+
+    h2 {
+        color: $heading;
+        margin-bottom: 50px;
+    }
+}
+
+.resume-block {
+    margin: 0 auto 30px auto;
+    height: 100vh;
+}
+
+
 /*
     -------------------------------
     ----- 8. Project Styles -----
