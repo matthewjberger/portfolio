@@ -5,3 +5,4 @@ pub mod game;
 pub mod setup;
 pub mod sky;
 pub mod tour;
+pub mod world;

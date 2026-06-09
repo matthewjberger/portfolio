@@ -1,4 +1,5 @@
 use crate::ecs::PortfolioWorld;
+use crate::systems::world::textures::{FLOOR_TEXTURE, prototype_material};
 use nightshade::ecs::material::components::Material;
 use nightshade::prelude::*;
 use protocol::{GAME_LEVELS, GameCommand, GamePhase, GameStatus, WorkerMessage};
@@ -296,7 +297,7 @@ fn build_arena(portfolio: &mut PortfolioWorld, world: &mut World) {
         world,
         origin + Vec3::new(0.0, -1.0, 0.0),
         Vec3::new(PLATFORM_HALF * 2.0, 2.0, PLATFORM_HALF * 2.0),
-        create_textured_material(Vec3::new(0.16, 0.17, 0.22), 0.9, 0.0),
+        prototype_material(FLOOR_TEXTURE, Vec3::new(0.52, 0.55, 0.66), 0.9, 0.0),
     );
     world.core.set_name(platform, Name("Arena".to_string()));
     portfolio.resources.game.arena.push(platform);

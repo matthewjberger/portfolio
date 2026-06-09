@@ -4,10 +4,10 @@ use protocol::GamePhase;
 use crate::content::Content;
 use crate::state::PortfolioState;
 
-const PANEL: &str = "rounded-2xl border border-white/10 bg-[#101218]/70 backdrop-blur-md shadow-2xl shadow-black/40";
-const CARD: &str = "rounded-xl border border-white/10 bg-white/[0.03] hover:border-violet-400/40 transition-colors";
+const PANEL: &str = "rounded-2xl border border-white/15 bg-[#0c0e14]/90 backdrop-blur-md shadow-2xl shadow-black/40";
+const CARD: &str = "rounded-xl hover:border-violet-400/40 transition-colors";
 const CHIP: &str =
-    "px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-white/60";
+    "px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-white/75";
 
 /// A full-height page section that fades and rises in once the scroll spy has
 /// reached it.
@@ -35,7 +35,7 @@ fn Section(
 fn heading(kicker: &'static str, title: &'static str) -> impl IntoView {
     view! {
         <div class="mb-6">
-            <span class="text-[12px] uppercase tracking-[0.3em] text-violet-300/80">{kicker}</span>
+            <span class="text-[12px] uppercase tracking-[0.3em] text-violet-300">{kicker}</span>
             <h2 class="mt-1 text-[28px] sm:text-[34px] font-bold text-white">{title}</h2>
         </div>
     }
@@ -48,7 +48,7 @@ pub fn Hero(state: PortfolioState, content: &'static Content) -> impl IntoView {
         .paragraphs
         .iter()
         .map(|paragraph| {
-            view! { <p class="text-[15px] leading-relaxed text-white/70">{paragraph.as_str()}</p> }
+            view! { <p class="text-[15px] leading-relaxed text-white/85">{paragraph.as_str()}</p> }
         })
         .collect_view();
 
@@ -114,7 +114,7 @@ pub fn Hero(state: PortfolioState, content: &'static Content) -> impl IntoView {
                         </Show>
                     </div>
                     <Show when=move || state.webgpu fallback=|| ()>
-                        <p class="mt-6 text-[11px] text-white/35">
+                        <p class="mt-6 text-[11px] text-white/60">
                             "The world behind this page is rendered live by the Nightshade engine in a web worker. Scroll to fly through it."
                         </p>
                     </Show>
@@ -144,7 +144,7 @@ pub fn Highlights(state: PortfolioState, content: &'static Content) -> impl Into
                     />
                     <div class="p-5 flex flex-col gap-3 flex-1">
                         <h3 class="text-[17px] font-semibold text-white">{highlight.title.as_str()}</h3>
-                        <p class="text-[13px] leading-relaxed text-white/60 flex-1">
+                        <p class="text-[13px] leading-relaxed text-white/80 flex-1">
                             {highlight.description.as_str()}
                         </p>
                         <div class="flex items-center gap-2">
@@ -193,7 +193,7 @@ pub fn ExperienceTimeline(state: PortfolioState, content: &'static Content) -> i
                     .iter()
                     .map(|achievement| {
                         view! {
-                            <li class="text-[13px] leading-relaxed text-white/65 pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-violet-400/70">
+                            <li class="text-[13px] leading-relaxed text-white/85 pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-violet-400/70">
                                 {achievement.as_str()}
                             </li>
                         }
@@ -207,13 +207,13 @@ pub fn ExperienceTimeline(state: PortfolioState, content: &'static Content) -> i
                     <div class=format!("{PANEL} p-5")>
                         <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                             <h3 class="text-[16px] font-semibold text-white">{job.company.as_str()}</h3>
-                            <span class="text-[12px] text-white/45 tabular-nums">{job.period.as_str()}</span>
+                            <span class="text-[12px] text-white/65 tabular-nums">{job.period.as_str()}</span>
                         </div>
                         <p class="mt-0.5 text-[13px] text-violet-300/90">{job.title.as_str()}</p>
                         <ul class="mt-3 space-y-2">{achievements}</ul>
                         <Show when=move || { total > 3 } fallback=|| ()>
                             <button
-                                class="mt-3 text-[12px] text-white/45 hover:text-white/85 transition-colors"
+                                class="mt-3 text-[12px] text-white/65 hover:text-white transition-colors"
                                 on:click=move |_| expanded.update(|open| *open = !*open)
                             >
                                 {move || {
@@ -297,7 +297,7 @@ pub fn Projects(state: PortfolioState, content: &'static Content) -> impl IntoVi
                         rel="noopener noreferrer"
                     >
                         <h3 class="text-[15px] font-semibold text-white">{project.title.as_str()}</h3>
-                        <p class="text-[12.5px] leading-relaxed text-white/60 flex-1">
+                        <p class="text-[12.5px] leading-relaxed text-white/80 flex-1">
                             {project.description.as_str()}
                         </p>
                         <div class="flex flex-wrap gap-1.5">{technologies}</div>
@@ -344,7 +344,7 @@ pub fn CratesSection(state: PortfolioState, content: &'static Content) -> impl I
                     rel="noopener noreferrer"
                 >
                     <h3 class="text-[15px] font-semibold text-white">{item.title.as_str()}</h3>
-                    <p class="text-[12.5px] leading-relaxed text-white/60 flex-1">
+                    <p class="text-[12.5px] leading-relaxed text-white/80 flex-1">
                         {item.description.as_str()}
                     </p>
                     <div class="flex flex-wrap gap-1.5">{technologies}</div>
@@ -381,7 +381,7 @@ pub fn SkillsSection(state: PortfolioState, content: &'static Content) -> impl I
         .iter()
         .map(|skill| {
             view! {
-                <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/65 text-[12px]">
+                <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-[12px]">
                     {skill.as_str()}
                 </span>
             }
@@ -408,12 +408,12 @@ pub fn EducationSection(state: PortfolioState, content: &'static Content) -> imp
             view! {
                 <div class=format!("{PANEL} p-6")>
                     <h3 class="text-[16px] font-semibold text-white">{degree.degree.as_str()}</h3>
-                    <p class="mt-1 text-[13px] text-white/60">
+                    <p class="mt-1 text-[13px] text-white/75">
                         {degree.institution.as_str()}
                         " · "
                         {degree.period.as_str()}
                     </p>
-                    <p class="mt-2 text-[13px] text-white/55">{degree.description.as_str()}</p>
+                    <p class="mt-2 text-[13px] text-white/70">{degree.description.as_str()}</p>
                 </div>
             }
         })
@@ -423,7 +423,7 @@ pub fn EducationSection(state: PortfolioState, content: &'static Content) -> imp
         <Section index=6 id="education" state=state>
             {heading("Background", "Education")}
             <div class="space-y-4 max-w-[560px]">{degrees}</div>
-            <footer class="mt-16 pb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-white/40">
+            <footer class="mt-16 pb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-white/65">
                 <span>"© Matthew Berger"</span>
                 <a
                     class="hover:text-white/80 transition-colors"

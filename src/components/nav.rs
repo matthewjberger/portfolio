@@ -16,7 +16,7 @@ pub fn Nav(state: PortfolioState, content: &'static Content) -> impl IntoView {
                 if state.section.get() == index {
                     "hidden lg:inline px-2.5 py-1 rounded-md text-[12px] bg-white/10 text-white transition-colors"
                 } else {
-                    "hidden lg:inline px-2.5 py-1 rounded-md text-[12px] text-white/60 hover:text-white hover:bg-white/5 transition-colors"
+                    "hidden lg:inline px-2.5 py-1 rounded-md text-[12px] text-white/75 hover:text-white hover:bg-white/5 transition-colors"
                 }
             };
             view! {
@@ -28,7 +28,7 @@ pub fn Nav(state: PortfolioState, content: &'static Content) -> impl IntoView {
         .collect_view();
 
     view! {
-        <nav class="fixed top-3 left-3 right-3 h-11 z-30 flex items-center gap-1 px-3 rounded-xl border border-white/10 bg-[#101218]/75 backdrop-blur-md shadow-lg shadow-black/40">
+        <nav class="fixed top-3 left-3 right-3 h-11 z-30 flex items-center gap-1 px-3 rounded-xl border border-white/10 bg-[#0c0e14]/90 backdrop-blur-md shadow-lg shadow-black/40">
             <a
                 href="#hero"
                 class="shrink-0 text-[13px] font-semibold text-white/90 hover:text-white mr-2"
@@ -49,7 +49,7 @@ pub fn Nav(state: PortfolioState, content: &'static Content) -> impl IntoView {
                 <div class="shrink-0 w-px h-4 bg-white/10 mx-1"></div>
             </Show>
             <a
-                class="shrink-0 px-2.5 py-1 rounded-md text-[12px] text-white/70 hover:bg-white/10 transition-colors"
+                class="shrink-0 px-2.5 py-1 rounded-md text-[12px] text-white/85 hover:bg-white/10 transition-colors"
                 href=content.about.github.as_str()
                 target="_blank"
                 rel="noopener noreferrer"
@@ -57,7 +57,7 @@ pub fn Nav(state: PortfolioState, content: &'static Content) -> impl IntoView {
                 "GitHub"
             </a>
             <a
-                class="shrink-0 px-2.5 py-1 rounded-md text-[12px] text-white/70 hover:bg-white/10 transition-colors"
+                class="shrink-0 px-2.5 py-1 rounded-md text-[12px] text-white/85 hover:bg-white/10 transition-colors"
                 href=content.about.linkedin.as_str()
                 target="_blank"
                 rel="noopener noreferrer"
@@ -65,7 +65,7 @@ pub fn Nav(state: PortfolioState, content: &'static Content) -> impl IntoView {
                 "LinkedIn"
             </a>
             <a
-                class="shrink-0 px-2.5 py-1 rounded-md text-[12px] text-white/70 hover:bg-white/10 transition-colors"
+                class="shrink-0 px-2.5 py-1 rounded-md text-[12px] text-white/85 hover:bg-white/10 transition-colors"
                 href=content.about.resume.as_str()
                 target="_blank"
                 rel="noopener noreferrer"
