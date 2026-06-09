@@ -5,15 +5,9 @@ use crate::ecs::PortfolioWorld;
 use nightshade::prelude::{ehttp, serde_json, *};
 use serde::Deserialize;
 
-const HDRI_INDEX: &str = "https://api.polyhaven.com/assets?type=hdris";
 const HDRI_FILES: &str = "https://api.polyhaven.com/files/";
+const SKYBOX: &str = "kloofendal_48d_partly_cloudy_puresky";
 const RESOLUTION: u32 = 4;
-
-#[derive(Deserialize)]
-struct HdriAsset {
-    #[serde(default)]
-    categories: Vec<String>,
-}
 
 #[derive(Deserialize)]
 struct FileLink {
@@ -31,44 +25,11 @@ struct HdriFiles {
     hdri: BTreeMap<String, HdriResolution>,
 }
 
-/// Kicks off the skybox download: fetch the Polyhaven HDRI index, pick a
-/// random outdoor sky, resolve its 4k HDR file, and stash the bytes for
-/// `poll` to apply on the render thread.
+/// Kicks off the skybox download: resolve the pinned Polyhaven sky's 4k HDR
+/// file and stash the bytes for `poll` to apply on the render thread.
 pub fn fetch(portfolio: &PortfolioWorld) {
     let slot = Arc::clone(&portfolio.resources.sky.bytes);
-    ehttp::fetch(ehttp::Request::get(HDRI_INDEX), move |result| {
-        let outdoor: Vec<String> = result
-            .ok()
-            .filter(|response| response.ok)
-            .and_then(|response| {
-                serde_json::from_slice::<BTreeMap<String, HdriAsset>>(&response.bytes).ok()
-            })
-            .map(|assets| {
-                assets
-                    .into_iter()
-                    .filter(|(_, asset)| {
-                        asset
-                            .categories
-                            .iter()
-                            .any(|category| category == "outdoor")
-                    })
-                    .map(|(slug, _)| slug)
-                    .collect()
-            })
-            .unwrap_or_default();
-        if outdoor.is_empty() {
-            return;
-        }
-        let index =
-            ((js_sys::Math::random() * outdoor.len() as f64) as usize).min(outdoor.len() - 1);
-        let slug = outdoor[index].clone();
-        tracing::info!("loading the {slug} skybox");
-        fetch_files(slug, slot);
-    });
-}
-
-fn fetch_files(slug: String, slot: Arc<Mutex<Option<Vec<u8>>>>) {
-    let files_url = format!("{HDRI_FILES}{slug}");
+    let files_url = format!("{HDRI_FILES}{SKYBOX}");
     ehttp::fetch(ehttp::Request::get(&files_url), move |result| {
         let url = result
             .ok()
