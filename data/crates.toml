@@ -1,0 +1,85 @@
+title = "Published Crates"
+
+[[items]]
+title = "bamboo-ssg 🦀"
+description = "A fast static site generator written in Rust. Markdown + Tera templates, syntect-highlighted code blocks with copy/line-numbers toolbar, live-reload dev server with incremental builds, RSS/Atom/sitemap, Sass, responsive images, and an embedded default theme. Powers this site and matthewberger.dev/articles."
+link = "https://github.com/matthewjberger/bamboo"
+technologies = ["Rust", "Static Site", "Tera", "syntect"]
+
+[[items]]
+title = "cameras 🦀"
+description = "A cross-platform camera library for Rust with data-oriented design: explicit format negotiation, push-based frame delivery, typed errors, zero trait objects. macOS (AVFoundation), Windows (Media Foundation), Linux (V4L2), plus optional RTSP. Ships with dioxus-cameras and egui-cameras integration crates."
+link = "https://github.com/matthewjberger/cameras"
+technologies = ["Rust", "AVFoundation", "Media Foundation", "V4L2", "RTSP"]
+
+[[items]]
+title = "charter 🦀"
+description = "Structural codebase intelligence for LLMs via MCP. Parses Rust and Python projects with tree-sitter, builds an in-memory index of symbols, call graphs, type hierarchies, and cross-references, then exposes it through structured JSON tools. Sub-millisecond query latency."
+link = "https://github.com/matthewjberger/charter"
+technologies = ["Rust", "MCP", "tree-sitter", "LLM"]
+
+[[items]]
+title = "dhcplease 🦀"
+description = "A cross-platform DHCP server library and CLI with full protocol implementation (all 8 DHCP message types), Option 61 client identifiers, Option 82 relay-agent echo, static MAC-to-IP bindings, persisted leases, concurrent packet handling with rate limiting. Async Tokio. Runs natively on Windows, including interface binding (rare for open-source DHCP servers)."
+link = "https://github.com/matthewjberger/dhcplease"
+technologies = ["Rust", "Tokio", "DHCP", "Networking"]
+
+[[items]]
+title = "egui-thematic 🦀"
+description = "A theme editor and configuration system for egui applications with full control over 73 visual properties, live preview window, 9 built-in presets (Dracula, Nord, Gruvbox, Solarized, Tokyo Night, etc.), random theme generation, JSON/Rust code export, and persistence."
+link = "https://github.com/matthewjberger/egui-thematic"
+technologies = ["Rust", "egui", "Theming"]
+
+[[items]]
+title = "enum2contract 🦀"
+description = "A no_std compatible Rust derive macro for defining pub/sub messaging contracts using strongly typed enums. Generates topic strings, payload structs, and supports JSON and binary formats."
+link = "https://github.com/matthewjberger/enum2contract"
+technologies = ["Rust", "Macros", "no_std"]
+
+[[items]]
+title = "enum2egui 🦀"
+description = "A procedural macro for automatically generating egui UI code from Rust types. Supports structs, enums, nested types, and provides both read-only and mutable editing interfaces."
+link = "https://github.com/matthewjberger/enum2egui"
+technologies = ["Rust", "Macros", "egui"]
+
+[[items]]
+title = "enum2pos 🦀"
+description = "A Rust derive macro library that maps enum variants to their declaration position, enabling bidirectional transformation between variants and numeric indices."
+link = "https://github.com/matthewjberger/enum2pos"
+technologies = ["Rust", "Macros"]
+
+[[items]]
+title = "enum2repr 🦀"
+description = "A Rust derive macro that automates bidirectional conversion between enum variants and their numeric representations, eliminating boilerplate for manual type conversions."
+link = "https://github.com/matthewjberger/enum2repr"
+technologies = ["Rust", "Macros"]
+
+[[items]]
+title = "enum2str 🦀"
+description = "A Rust derive macro that automatically implements the Display trait for enums with support for custom formatting, templates, and no_std compatibility."
+link = "https://github.com/matthewjberger/enum2str"
+technologies = ["Rust", "Macros", "no_std"]
+
+[[items]]
+title = "freecs 🦀"
+description = "Archetype-based Entity Component System in Rust with zero unsafe code, Rayon-parallel system execution, sparse-set tags, deferred command buffers, and watermark change detection. The entire ECS is generated at compile time via a declarative macro. 48k+ downloads on crates.io."
+link = "https://github.com/matthewjberger/freecs"
+technologies = ["Rust", "ECS", "Macros", "Rayon"]
+
+[[items]]
+title = "nightshade 🦀"
+description = "Data-oriented Rust game engine featuring a custom render graph, built-in editor, rapier3d physics, kira audio, gltf asset loading, scene graph, object picking, and Steam integration. Runs natively on DX12/Metal/Vulkan and in-browser via WebGPU."
+link = "https://github.com/matthewjberger/nightshade"
+technologies = ["Rust", "wgpu", "WebGPU", "Graphics"]
+
+[[items]]
+title = "stateless 🦀"
+description = "A zero-cost state machine library that separates structure from behavior. Guards and actions live in wrapper code, not the DSL."
+link = "https://github.com/matthewjberger/stateless"
+technologies = ["Rust", "Macros", "State Machine", "no_std"]
+
+[[items]]
+title = "taps 🦀"
+description = "A Tokio async pub/sub message broker for in-process messaging between async tasks. Topic-based routing."
+link = "https://github.com/matthewjberger/taps"
+technologies = ["Rust", "Tokio", "Async", "Pub/Sub"]

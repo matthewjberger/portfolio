@@ -1,0 +1,23 @@
+[[items]]
+title = "nightshade 🦀"
+description = "Data-oriented Rust game engine with custom render graph, built-in editor, rapier3d physics, kira audio, gltf asset loading, scene graph, object picking, and Steam integration. Runs natively on DX12/Metal/Vulkan and in-browser via WebGPU."
+link = "https://github.com/matthewjberger/nightshade"
+image = "/nightshade.png"
+demo_link = "https://matthewberger.dev/nightshade"
+demo_label = "View Live Demos"
+
+[[items]]
+title = "freecs 🦀"
+description = "Archetype-based ECS in Rust with zero unsafe code, Rayon-parallel system execution, sparse-set tags, deferred command buffers, and watermark change detection. The entire ECS is generated at compile time via a declarative macro. 48k+ downloads on crates.io, with design documented in a 3-part series."
+link = "https://github.com/matthewjberger/freecs"
+image = "/freecs.png"
+demo_link = "https://matthewberger.dev/articles"
+demo_label = "Read the Series"
+
+[[items]]
+title = "bamboo 🦀"
+description = "A fast static site generator written in Rust. Markdown + Tera templates, syntect-highlighted code blocks with copy and line-number toolbar, live-reload dev server with incremental builds, RSS/Atom/sitemap, Sass compilation, responsive images, and an embedded default theme. Powers this site."
+link = "https://github.com/matthewjberger/bamboo"
+image = "/bamboo.svg"
+demo_link = "https://matthewberger.dev/articles/posts/building-a-static-site-generator-in-rust/"
+demo_label = "Read the Walkthrough"

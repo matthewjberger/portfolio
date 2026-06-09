@@ -1,0 +1,36 @@
+title = "Skills"
+description = "Tools and domains I've shipped to production."
+sort = "asc"
+
+top_items = [
+    "Rust",
+    "Embedded systems",
+    "Real-time control",
+    "Robotics",
+    "Async / Tokio",
+]
+
+items = [
+    "Go",
+    "C#",
+    "C++",
+    "TypeScript",
+    "Python",
+    "RP2040",
+    "Embassy",
+    "IPC",
+    "Message brokers",
+    "Yocto Linux",
+    "Leptos",
+    "Dioxus",
+    "egui",
+    "WebAssembly",
+    "wgpu",
+    "Vulkan",
+    "OpenGL",
+    "AWS",
+    "Pulumi",
+    "Greengrass IoT",
+    "Docker",
+    "GitHub Actions",
+]

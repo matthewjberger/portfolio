@@ -1,0 +1,125 @@
+[[items]]
+title = "nightshade 🦀"
+language = "rust"
+description = "Data-oriented Rust game engine featuring custom render graph, built-in editor, rapier3d physics, kira audio, gltf asset loading, scene graph, object picking, and Steam integration. Runs natively on DX12/Metal/Vulkan and in-browser via WebGPU."
+link = "https://github.com/matthewjberger/nightshade"
+technologies = ["Rust", "wgpu", "ECS", "WebGPU"]
+
+[[items]]
+title = "freecs 🦀"
+language = "rust"
+description = "Archetype-based ECS in Rust with zero unsafe code, Rayon-parallel system execution, sparse-set tags, deferred command buffers, and watermark change detection. The entire ECS is generated at compile time via a declarative macro. 48k+ downloads on crates.io."
+link = "https://github.com/matthewjberger/freecs"
+technologies = ["Rust", "ECS", "Macros", "Rayon"]
+
+[[items]]
+title = "bamboo 🦀"
+language = "rust"
+description = "A fast static site generator written in Rust. Powers this site and the articles blog."
+link = "https://github.com/matthewjberger/bamboo"
+technologies = ["Rust", "Static Site", "Tera"]
+
+[[items]]
+title = "cameras 🦀"
+language = "rust"
+description = "A cross-platform Rust camera library with data-oriented design (explicit format negotiation, push-based frame delivery, zero trait objects). Ships with Dioxus and egui integrations."
+link = "https://github.com/matthewjberger/cameras"
+technologies = ["Rust", "Dioxus", "egui"]
+
+[[items]]
+title = "charter 🦀"
+language = "rust"
+description = "Fast structural context generator for Rust codebases, optimized for LLM consumption. Walks crates and emits compact summaries suitable for AI tooling."
+link = "https://github.com/matthewjberger/charter"
+technologies = ["Rust", "CLI", "LLM"]
+
+[[items]]
+title = "clippr 🦀"
+language = "rust"
+description = "Convert MP4 to chunked GitHub-friendly GIFs. CLI tool for sharing video clips in markdown."
+link = "https://github.com/matthewjberger/clippr"
+technologies = ["Rust", "CLI", "Video"]
+
+[[items]]
+title = "dragonglass 🦀"
+language = "rust"
+description = "A 3D graphics engine built with Rust and Vulkan, featuring PBR rendering, 3D object picking, and a visual editor."
+link = "https://github.com/matthewjberger/dragonglass"
+technologies = ["Rust", "Vulkan", "Graphics"]
+
+[[items]]
+title = "frost 🦀"
+language = "rust"
+description = "A statically-typed programming language with Odin-style syntax and Rust-inspired ownership. Dual backend: bytecode VM for development, Cranelift for production."
+link = "https://github.com/matthewjberger/frost"
+technologies = ["Rust", "Compiler", "Cranelift"]
+
+[[items]]
+title = "wgpu-example 🦀"
+language = "rust"
+description = "A minimal example of using Rust, wgpu, and egui without eframe. Shows how to build graphics that run everywhere: native desktop, WebGPU/WebGL via WebAssembly, Android, Steam Deck, and OpenXR VR with hand tracking."
+link = "https://github.com/matthewjberger/wgpu-example"
+technologies = ["Rust", "wgpu", "egui", "WebAssembly", "OpenXR"]
+
+[[items]]
+title = "vulkan-example 🦀"
+language = "rust"
+description = "A minimal example of using Rust, Vulkan, and egui together without eframe. Features Vulkan 1.3 with dynamic rendering and GLSL shader compilation to SPIR-V."
+link = "https://github.com/matthewjberger/vulkan-example"
+technologies = ["Rust", "Vulkan", "egui", "GLSL"]
+
+[[items]]
+title = "opengl-example 🦀"
+language = "rust"
+description = "A minimal example demonstrating Rust, OpenGL, and egui integration. Features a spinning triangle rendered with OpenGL via gl-rs and glutin."
+link = "https://github.com/matthewjberger/opengl-example"
+technologies = ["Rust", "OpenGL", "egui", "GLSL"]
+
+[[items]]
+title = "stateless 🦀"
+language = "rust"
+description = "A state machine library with a DSL that separates state from behavior, for writing clear finite state machines in Rust."
+link = "https://github.com/matthewjberger/stateless"
+technologies = ["Rust", "State Machine", "DSL"]
+
+[[items]]
+title = "superbible 🦀"
+language = "rust"
+description = "Rust implementations of OpenGL examples from the OpenGL Superbible 7th edition. Features advanced shader techniques, texture mapping, 3D transformations, and lighting models."
+link = "https://github.com/matthewjberger/superbible"
+technologies = ["Rust", "OpenGL", "GLSL"]
+
+[[items]]
+title = "indigo"
+language = "go"
+description = "A data-oriented game engine written in Go with a custom ECS and render graph. Works on Windows, Linux, macOS, and Web."
+link = "https://github.com/matthewjberger/indigo"
+technologies = ["Go", "wgpu", "ECS", "WebAssembly"]
+
+[[items]]
+title = "freecs-go"
+language = "go"
+description = "Archetype ECS for Go, a port of the freecs Rust library that backs Nightshade."
+link = "https://github.com/matthewjberger/freecs-go"
+technologies = ["Go", "ECS"]
+
+[[items]]
+title = "wgpu-example-go"
+language = "go"
+description = "Go port of wgpu-example. Spinning RGB triangle on native desktop (GLFW) and WebGPU via WASM."
+link = "https://github.com/matthewjberger/wgpu-example-go"
+technologies = ["Go", "wgpu", "WebAssembly"]
+
+[[items]]
+title = "eager"
+language = "other"
+description = "An Ogre3D 1.9 and C++ project template using CMake for quick setup. Features multi-platform support, optional Bullet Physics integration, and Vagrant development environment."
+link = "https://github.com/matthewjberger/eager"
+technologies = ["C++", "Ogre3D", "CMake"]
+
+[[items]]
+title = "scoop-nerd-fonts"
+language = "other"
+description = "One-command font installation for Windows. Maintainer of the canonical scoop bucket for Nerd Fonts and other open fonts. 440+ stars. Install via `scoop install <name>`."
+link = "https://github.com/matthewjberger/scoop-nerd-fonts"
+technologies = ["PowerShell", "Scoop", "Fonts"]

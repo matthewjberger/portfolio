@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-label="bamboo static site generator">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f3a2d"/>
+      <stop offset="55%" stop-color="#176b48"/>
+      <stop offset="100%" stop-color="#22a26a"/>
+    </linearGradient>
+    <linearGradient id="stalk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5fbf8b"/>
+      <stop offset="50%" stop-color="#9be3b8"/>
+      <stop offset="100%" stop-color="#5fbf8b"/>
+    </linearGradient>
+    <linearGradient id="stalkDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b9a6b"/>
+      <stop offset="50%" stop-color="#79c79a"/>
+      <stop offset="100%" stop-color="#3b9a6b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="600" fill="url(#bg)"/>
+
+  <!-- soft glow under text -->
+  <ellipse cx="600" cy="430" rx="420" ry="40" fill="#000" opacity="0.18"/>
+
+  <!-- bamboo stalks (back layer, dimmer) -->
+  <g opacity="0.6">
+    <g transform="translate(120 0)">
+      <rect x="-26" y="40" width="52" height="520" rx="14" fill="url(#stalkDark)"/>
+      <rect x="-32" y="150" width="64" height="22" rx="8" fill="#1d6a48"/>
+      <rect x="-32" y="290" width="64" height="22" rx="8" fill="#1d6a48"/>
+      <rect x="-32" y="430" width="64" height="22" rx="8" fill="#1d6a48"/>
+      <path d="M 26 200 q 60 -20 110 -10 q -30 30 -110 30 z" fill="#79c79a"/>
+      <path d="M -26 340 q -70 -25 -130 -8 q 35 32 130 28 z" fill="#79c79a"/>
+    </g>
+    <g transform="translate(1040 0)">
+      <rect x="-26" y="40" width="52" height="520" rx="14" fill="url(#stalkDark)"/>
+      <rect x="-32" y="120" width="64" height="22" rx="8" fill="#1d6a48"/>
+      <rect x="-32" y="260" width="64" height="22" rx="8" fill="#1d6a48"/>
+      <rect x="-32" y="400" width="64" height="22" rx="8" fill="#1d6a48"/>
+      <path d="M -26 180 q -60 -22 -120 -6 q 32 32 120 28 z" fill="#79c79a"/>
+      <path d="M 26 360 q 70 -22 130 -6 q -32 32 -130 30 z" fill="#79c79a"/>
+    </g>
+  </g>
+
+  <!-- front bamboo stalks (brighter) -->
+  <g>
+    <g transform="translate(340 0)">
+      <rect x="-36" y="20" width="72" height="560" rx="20" fill="url(#stalk)"/>
+      <rect x="-44" y="120" width="88" height="28" rx="10" fill="#2a8556"/>
+      <rect x="-44" y="280" width="88" height="28" rx="10" fill="#2a8556"/>
+      <rect x="-44" y="440" width="88" height="28" rx="10" fill="#2a8556"/>
+      <path d="M 36 180 q 90 -32 170 -16 q -45 44 -170 42 z" fill="#a8eac4"/>
+      <path d="M -36 340 q -95 -32 -175 -14 q 48 46 175 40 z" fill="#a8eac4"/>
+    </g>
+    <g transform="translate(860 0)">
+      <rect x="-36" y="20" width="72" height="560" rx="20" fill="url(#stalk)"/>
+      <rect x="-44" y="160" width="88" height="28" rx="10" fill="#2a8556"/>
+      <rect x="-44" y="320" width="88" height="28" rx="10" fill="#2a8556"/>
+      <rect x="-44" y="480" width="88" height="28" rx="10" fill="#2a8556"/>
+      <path d="M -36 220 q -90 -32 -170 -14 q 46 44 170 40 z" fill="#a8eac4"/>
+      <path d="M 36 380 q 95 -32 175 -14 q -48 46 -175 40 z" fill="#a8eac4"/>
+    </g>
+  </g>
+
+  <!-- title plate -->
+  <g>
+    <text x="600" y="425" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="120" font-weight="700" fill="#ffffff" letter-spacing="-2">bamboo</text>
+    <text x="600" y="475" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="28" font-weight="500" fill="#d6f4e3" letter-spacing="2">A FAST STATIC SITE GENERATOR IN RUST</text>
+  </g>
+</svg>
