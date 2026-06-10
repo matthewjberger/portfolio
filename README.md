@@ -2,7 +2,7 @@
 
 Personal portfolio at [matthewberger.dev/portfolio](https://matthewberger.dev/portfolio/), rendered live by the [Nightshade](https://github.com/matthewjberger/nightshade) game engine. The engine runs inside a web worker against an OffscreenCanvas through WebGPU, and a [Leptos](https://leptos.dev) UI scrolls over a 3D world: page scroll flies the camera between section vignettes, the pointer adds parallax and nudges floating set pieces, and a hidden physics game ([Nightshade Siege](https://github.com/matthewjberger/nightshade-viewer)) ships as an easter egg.
 
-All portfolio content lives in `data/*.toml` and is embedded at compile time; editing content never touches component code. Browsers without WebGPU get the full content over a CSS backdrop.
+All portfolio data lives in `data/*.toml` and is embedded at compile time, so editing content never touches component code. Section headings and other UI copy live in the components, and images and the resume are static assets referenced by path. Browsers without WebGPU get the full content over a CSS backdrop.
 
 ## Workspace
 
