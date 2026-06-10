@@ -10,6 +10,8 @@ All portfolio data lives in `data/*.toml` and is embedded at compile time, so ed
 - worker, the wasm module inside the web worker: the world build, the scroll-driven camera tour, ambient animation, pointer floaters, and the Siege game systems.
 - the root crate, the Leptos UI: nav, hero, highlights, experience timeline, projects, crates, skills, education, and the game chrome.
 
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) covers how the pieces fit together: the thread split, the message protocol, the content pipeline, the camera tour, and the siege game.
+
 ## Quickstart
 
 Tooling is pinned in [mise.toml](mise.toml). Install [mise](https://mise.jdx.dev) and [just](https://github.com/casey/just), then:
