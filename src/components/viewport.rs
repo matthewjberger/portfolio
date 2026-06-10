@@ -184,14 +184,9 @@ pub fn Viewport(
                     );
                     if count == 1
                         && moved < 5.0
-                        && state.game_phase.get_untracked() == GamePhase::Playing
+                        && let Some(command) = tap_command(state, x, y)
                     {
-                        send(
-                            &bridge,
-                            &ClientMessage::Game {
-                                command: GameCommand::Fire { x, y },
-                            },
-                        );
+                        send(&bridge, &ClientMessage::Game { command });
                     }
                 }
             }
@@ -212,14 +207,9 @@ pub fn Viewport(
                 );
                 if button == Some(0)
                     && moved < 5.0
-                    && state.game_phase.get_untracked() == GamePhase::Playing
+                    && let Some(command) = tap_command(state, x, y)
                 {
-                    send(
-                        &bridge,
-                        &ClientMessage::Game {
-                            command: GameCommand::Fire { x, y },
-                        },
-                    );
+                    send(&bridge, &ClientMessage::Game { command });
                 }
             }
         }
@@ -271,6 +261,15 @@ pub fn Viewport(
             on:pointercancel=on_pointercancel
             on:contextmenu=on_contextmenu
         ></canvas>
+    }
+}
+
+/// A click without drag fires while playing and skips the intro cutscene.
+fn tap_command(state: PortfolioState, x: f32, y: f32) -> Option<GameCommand> {
+    match state.game_phase.get_untracked() {
+        GamePhase::Playing => Some(GameCommand::Fire { x, y }),
+        GamePhase::Intro => Some(GameCommand::SkipIntro),
+        _ => None,
     }
 }
 

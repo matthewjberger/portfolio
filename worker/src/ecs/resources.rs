@@ -85,6 +85,8 @@ pub struct Game {
     pub combo: u32,
     pub combo_timer: f32,
     pub settle_timer: f32,
+    pub cutscene_camera: Option<Entity>,
+    pub orbit_camera: Option<Entity>,
     pub dirty: bool,
 }
 
@@ -104,6 +106,8 @@ impl Default for Game {
             combo: 0,
             combo_timer: 0.0,
             settle_timer: 0.0,
+            cutscene_camera: None,
+            orbit_camera: None,
             dirty: false,
         }
     }

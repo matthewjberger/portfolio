@@ -23,6 +23,8 @@ pub fn game_level_name(level: u32) -> &'static str {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum GamePhase {
     Idle,
+    /// The intro cutscene is sweeping the arena before control hands over.
+    Intro,
     Playing,
     Cleared,
     Failed,
@@ -31,8 +33,11 @@ pub enum GamePhase {
 /// Page to worker game actions.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub enum GameCommand {
-    /// Build the given level (1-based) and start playing.
-    Start { level: u32 },
+    /// Build the given level (1-based) and start playing. With `intro` the
+    /// level opens on its cutscene; without it control is immediate.
+    Start { level: u32, intro: bool },
+    /// Jump the intro cutscene to its end.
+    SkipIntro,
     /// Fire a cannonball through this physical pixel position.
     Fire { x: f32, y: f32 },
     /// Tear the arena down and return to the portfolio tour.

@@ -21,8 +21,22 @@ fn send_command(bridge: BridgeSlot, command: GameCommand) {
 pub fn Game(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
     view! {
         <GameMenu bridge state />
+        <GameIntro state />
         <GameHud bridge state />
         <GameEnd bridge state />
+    }
+}
+
+#[component]
+fn GameIntro(state: PortfolioState) -> impl IntoView {
+    view! {
+        <Show when=move || state.game_phase.get() == GamePhase::Intro fallback=|| ()>
+            <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+                <span class="px-3 py-1.5 rounded-full border border-white/10 bg-[#14161d]/85 backdrop-blur-md text-[11px] text-white/60">
+                    "Click to skip"
+                </span>
+            </div>
+        </Show>
     }
 }
 
@@ -91,7 +105,7 @@ fn level_card(
     let start = move |_| {
         if unlocked {
             state.game_menu_open.set(false);
-            send_command(bridge, GameCommand::Start { level });
+            send_command(bridge, GameCommand::Start { level, intro: true });
         }
     };
     let class = if unlocked {
@@ -161,6 +175,7 @@ fn GameHud(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
             bridge,
             GameCommand::Start {
                 level: state.game_level.get_untracked(),
+                intro: false,
             },
         );
     };
@@ -259,6 +274,7 @@ fn GameEnd(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
             bridge,
             GameCommand::Start {
                 level: state.game_level.get_untracked(),
+                intro: false,
             },
         );
     };
@@ -267,6 +283,7 @@ fn GameEnd(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
             bridge,
             GameCommand::Start {
                 level: state.game_level.get_untracked() + 1,
+                intro: true,
             },
         );
     };
