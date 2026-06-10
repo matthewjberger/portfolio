@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use protocol::{ClientMessage, GAME_LEVELS, GameCommand, GamePhase, game_level_name};
 
 use crate::bridge::{Bridge, send};
-use crate::state::{PortfolioState, game_best, game_unlocked};
+use crate::state::{PortfolioState, game_best, game_unlocked, intro_seen, mark_intro_seen};
 
 type BridgeSlot = StoredValue<Option<Bridge>, LocalStorage>;
 
@@ -13,6 +13,16 @@ fn send_command(bridge: BridgeSlot, command: GameCommand) {
     if let Some(bridge) = bridge.get_value() {
         send(&bridge, &ClientMessage::Game { command });
     }
+}
+
+/// Starts a level, playing the intro cutscene only the first time this
+/// browser sees it.
+fn start_level(bridge: BridgeSlot, level: u32) {
+    let intro = !intro_seen(level);
+    if intro {
+        mark_intro_seen(level);
+    }
+    send_command(bridge, GameCommand::Start { level, intro });
 }
 
 /// The siege game chrome: the start menu with level select, the in-game HUD
@@ -105,7 +115,7 @@ fn level_card(
     let start = move |_| {
         if unlocked {
             state.game_menu_open.set(false);
-            send_command(bridge, GameCommand::Start { level, intro: true });
+            start_level(bridge, level);
         }
     };
     let class = if unlocked {
@@ -279,13 +289,7 @@ fn GameEnd(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
         );
     };
     let next = move |_| {
-        send_command(
-            bridge,
-            GameCommand::Start {
-                level: state.game_level.get_untracked() + 1,
-                intro: true,
-            },
-        );
+        start_level(bridge, state.game_level.get_untracked() + 1);
     };
     let menu = move |_| {
         send_command(bridge, GameCommand::Exit);

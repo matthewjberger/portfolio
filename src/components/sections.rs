@@ -138,7 +138,7 @@ pub fn Highlights(state: PortfolioState, content: &'static Content) -> impl Into
             view! {
                 <div class=format!("{CARD} {PANEL} overflow-hidden flex flex-col")>
                     <img
-                        src=format!("public/{}", highlight.image.trim_start_matches('/'))
+                        src=format!("static/{}", highlight.image.trim_start_matches('/'))
                         alt=highlight.title.clone()
                         class="w-full h-40 object-cover border-b border-white/10"
                     />

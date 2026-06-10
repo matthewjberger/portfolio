@@ -19,6 +19,7 @@ freecs::ecs! {
         ambient: Ambient,
         floaters: Floaters,
         sky: Sky,
+        cameras: Cameras,
         game: Game,
     }
 }

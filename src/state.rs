@@ -22,7 +22,6 @@ pub struct PortfolioState {
     pub fps: RwSignal<f32>,
     pub section: RwSignal<usize>,
     pub revealed: RwSignal<usize>,
-    pub reduced_motion: RwSignal<bool>,
     pub game_phase: RwSignal<GamePhase>,
     pub game_level: RwSignal<u32>,
     pub game_score: RwSignal<u32>,
@@ -43,7 +42,6 @@ impl PortfolioState {
             fps: RwSignal::new(0.0),
             section: RwSignal::new(0),
             revealed: RwSignal::new(0),
-            reduced_motion: RwSignal::new(false),
             game_phase: RwSignal::new(GamePhase::Idle),
             game_level: RwSignal::new(1),
             game_score: RwSignal::new(0),
@@ -101,5 +99,21 @@ pub fn record_game_best(level: u32, score: u32) {
         && let Some(storage) = local_storage()
     {
         let _ = storage.set_item(&game_best_key(level), &score.to_string());
+    }
+}
+
+/// Key under which the levels whose intro has played are recorded, as a bitmask.
+const INTRO_SEEN_KEY: &str = "portfolio_game_intro_seen";
+
+/// Whether a level's intro cutscene has already played on this browser.
+pub fn intro_seen(level: u32) -> bool {
+    read_storage_number(INTRO_SEEN_KEY) & (1 << level) != 0
+}
+
+/// Records that a level's intro cutscene has played.
+pub fn mark_intro_seen(level: u32) {
+    if let Some(storage) = local_storage() {
+        let seen = read_storage_number(INTRO_SEEN_KEY) | (1 << level);
+        let _ = storage.set_item(INTRO_SEEN_KEY, &seen.to_string());
     }
 }

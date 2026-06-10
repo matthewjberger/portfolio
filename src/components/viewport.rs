@@ -59,7 +59,7 @@ pub fn Viewport(
         let connected = bridge::connect(offscreen, width, height, state);
         attach_wheel(&canvas, bridge);
         observe_resize(canvas, connected.clone());
-        send_reduced_motion(&connected, state);
+        send_reduced_motion(&connected);
         attach_scroll(bridge);
         attach_glance(bridge);
         bridge.set_value(Some(connected));
@@ -243,11 +243,19 @@ pub fn Viewport(
     let on_contextmenu = move |event: MouseEvent| event.prevent_default();
 
     let canvas_class = move || {
-        if state.game_phase.get() == GamePhase::Idle {
-            "fixed inset-0 z-0 w-full h-full pointer-events-none"
+        let pointer = if state.game_phase.get() == GamePhase::Idle {
+            "pointer-events-none"
         } else {
-            "fixed inset-0 z-0 w-full h-full touch-none cursor-crosshair"
-        }
+            "touch-none cursor-crosshair"
+        };
+        let visibility = if state.ready.get() {
+            "opacity-100"
+        } else {
+            "opacity-0"
+        };
+        format!(
+            "fixed inset-0 z-0 w-full h-full transition-opacity duration-1000 {pointer} {visibility}"
+        )
     };
 
     view! {
@@ -377,7 +385,7 @@ fn attach_glance(bridge: StoredValue<Option<Bridge>, LocalStorage>) {
     });
 }
 
-fn send_reduced_motion(bridge: &Bridge, state: PortfolioState) {
+fn send_reduced_motion(bridge: &Bridge) {
     let reduced = web_sys::window()
         .and_then(|window| {
             window
@@ -387,7 +395,6 @@ fn send_reduced_motion(bridge: &Bridge, state: PortfolioState) {
         })
         .map(|query| query.matches())
         .unwrap_or(false);
-    state.reduced_motion.set(reduced);
     if reduced {
         send(bridge, &ClientMessage::SetReducedMotion { enabled: true });
     }

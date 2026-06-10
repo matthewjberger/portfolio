@@ -35,7 +35,7 @@ pub fn spawn(portfolio: &mut PortfolioWorld, world: &mut World) {
         light.shadow_bias = 0.008;
     }
 
-    crate::systems::camera::ensure_active(world);
+    crate::systems::camera::ensure_active(portfolio, world);
     crate::systems::sky::fetch(portfolio);
 
     level::build(portfolio, world);

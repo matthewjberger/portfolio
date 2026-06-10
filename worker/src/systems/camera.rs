@@ -1,9 +1,11 @@
+use crate::ecs::PortfolioWorld;
 use nightshade::prelude::*;
 
-/// Guarantees a controllable active camera every frame. If the active camera
-/// is missing, a fresh pan-orbit camera is spawned and made active so the tour
-/// and the game always have something to drive.
-pub fn ensure_active(world: &mut World) {
+/// Guarantees a controllable player camera every frame. If the active camera
+/// is missing, a fresh pan-orbit camera is spawned, recorded as the player
+/// camera, and made active so the tour and the game always have something to
+/// drive.
+pub fn ensure_active(portfolio: &mut PortfolioWorld, world: &mut World) {
     let valid = world
         .resources
         .active_camera
@@ -20,6 +22,7 @@ pub fn ensure_active(world: &mut World) {
         "Camera".to_string(),
     );
     world.resources.active_camera = Some(camera);
+    portfolio.resources.cameras.player = Some(camera);
     world.core.add_components(camera, VIEWPORT_SHADING);
     world.core.set_viewport_shading(
         camera,

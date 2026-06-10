@@ -10,6 +10,15 @@ pub struct Sky {
     pub bytes: Arc<Mutex<Option<Vec<u8>>>>,
 }
 
+/// Camera ownership: the player's pan-orbit camera and the cinematic camera
+/// the cutscenes drive. Keeping both handles here means any system can hand
+/// the active camera back to the player without guessing what is active.
+#[derive(Default)]
+pub struct Cameras {
+    pub player: Option<Entity>,
+    pub cinematic: Option<Entity>,
+}
+
 /// The scroll-driven camera tour: the page's smoothed scroll progress, the
 /// normalized pointer glance for parallax, and the reduced-motion flag.
 #[derive(Default)]
@@ -85,8 +94,6 @@ pub struct Game {
     pub combo: u32,
     pub combo_timer: f32,
     pub settle_timer: f32,
-    pub cutscene_camera: Option<Entity>,
-    pub orbit_camera: Option<Entity>,
     pub dirty: bool,
 }
 
@@ -106,8 +113,6 @@ impl Default for Game {
             combo: 0,
             combo_timer: 0.0,
             settle_timer: 0.0,
-            cutscene_camera: None,
-            orbit_camera: None,
             dirty: false,
         }
     }

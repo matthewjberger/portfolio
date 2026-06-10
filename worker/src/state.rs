@@ -15,7 +15,7 @@ impl State for Portfolio {
     }
 
     fn run_systems(&mut self, world: &mut World) {
-        systems::camera::ensure_active(world);
+        systems::camera::ensure_active(&mut self.portfolio, world);
         systems::tour::update(&mut self.portfolio, world);
         pan_orbit_camera_system(world);
         systems::sky::poll(&mut self.portfolio, world);

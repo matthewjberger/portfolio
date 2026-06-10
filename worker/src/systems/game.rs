@@ -85,12 +85,9 @@ pub fn update(portfolio: &mut PortfolioWorld, world: &mut World) {
     let mut expired = Vec::new();
     for (projectile, age) in &mut portfolio.resources.game.projectiles {
         *age += delta;
-        let y = world
-            .core
-            .get_local_transform(*projectile)
-            .map(|transform| transform.translation.y)
-            .unwrap_or(CLEANUP_DROP_Y);
-        if *age >= PROJECTILE_LIFETIME || y < CLEANUP_DROP_Y {
+        if *age >= PROJECTILE_LIFETIME
+            || height(world, *projectile, CLEANUP_DROP_Y) < CLEANUP_DROP_Y
+        {
             expired.push(*projectile);
         }
     }
@@ -99,34 +96,18 @@ pub fn update(portfolio: &mut PortfolioWorld, world: &mut World) {
         .game
         .projectiles
         .retain(|(projectile, _)| !expired.contains(projectile));
-    for projectile in expired {
-        if world
-            .core
-            .entity_has_components(projectile, LOCAL_TRANSFORM)
-        {
-            despawn_recursive_immediate(world, projectile);
-        }
-    }
+    despawn_all(world, expired);
 
     let mut sunk = Vec::new();
     portfolio.resources.game.blocks.retain(|&block| {
-        let y = world
-            .core
-            .get_local_transform(block)
-            .map(|transform| transform.translation.y)
-            .unwrap_or(CLEANUP_DROP_Y);
-        if y < CLEANUP_DROP_Y {
+        if height(world, block, CLEANUP_DROP_Y) < CLEANUP_DROP_Y {
             sunk.push(block);
             false
         } else {
             true
         }
     });
-    for block in sunk {
-        if world.core.entity_has_components(block, LOCAL_TRANSFORM) {
-            despawn_recursive_immediate(world, block);
-        }
-    }
+    despawn_all(world, sunk);
 
     let mut scored = Vec::new();
     portfolio
@@ -134,11 +115,7 @@ pub fn update(portfolio: &mut PortfolioWorld, world: &mut World) {
         .game
         .targets
         .retain(|&(target, spawn_y)| {
-            let y = world
-                .core
-                .get_local_transform(target)
-                .map(|transform| transform.translation.y)
-                .unwrap_or(SCORE_DROP_Y - 1.0);
+            let y = height(world, target, SCORE_DROP_Y - 1.0);
             if y < SCORE_DROP_Y || y < spawn_y - KNOCKDOWN_DROP {
                 scored.push(target);
                 false
@@ -147,9 +124,7 @@ pub fn update(portfolio: &mut PortfolioWorld, world: &mut World) {
             }
         });
     for target in scored {
-        if world.core.entity_has_components(target, LOCAL_TRANSFORM) {
-            despawn_recursive_immediate(world, target);
-        }
+        despawn(world, target);
         let game = &mut portfolio.resources.game;
         game.combo += 1;
         game.combo_timer = COMBO_WINDOW;
@@ -186,8 +161,38 @@ pub fn update(portfolio: &mut PortfolioWorld, world: &mut World) {
     }
 }
 
+/// The world-space height of an entity, or `missing` once it is gone.
+fn height(world: &World, entity: Entity, missing: f32) -> f32 {
+    world
+        .core
+        .get_local_transform(entity)
+        .map(|transform| transform.translation.y)
+        .unwrap_or(missing)
+}
+
+/// Despawns an entity if it is still alive.
+fn despawn(world: &mut World, entity: Entity) {
+    if world.core.entity_has_components(entity, LOCAL_TRANSFORM) {
+        despawn_recursive_immediate(world, entity);
+    }
+}
+
+fn despawn_all(world: &mut World, entities: Vec<Entity>) {
+    for entity in entities {
+        despawn(world, entity);
+    }
+}
+
+/// Makes the player camera active again, whatever was driving the view.
+fn restore_player_camera(portfolio: &PortfolioWorld, world: &mut World) {
+    if let Some(camera) = portfolio.resources.cameras.player {
+        world.resources.active_camera = Some(camera);
+    }
+}
+
 fn start(portfolio: &mut PortfolioWorld, world: &mut World, level: u32, intro: bool) {
     stop_cutscene(world);
+    restore_player_camera(portfolio, world);
     clear_arena(portfolio, world);
     world.resources.physics.enabled = true;
 
@@ -252,12 +257,10 @@ fn start(portfolio: &mut PortfolioWorld, world: &mut World, level: u32, intro: b
     }
 }
 
-/// Switches to the dedicated cutscene camera and plays the level's intro
-/// sweep. The orbit camera is stashed so the finish can hand control back.
+/// Switches to the cinematic camera and plays the level's intro sweep. The
+/// player camera stays recorded in the cameras resource for the handoff.
 fn begin_intro(portfolio: &mut PortfolioWorld, world: &mut World, level: u32) {
-    portfolio.resources.game.orbit_camera = world.resources.active_camera;
-
-    let camera = match portfolio.resources.game.cutscene_camera {
+    let camera = match portfolio.resources.cameras.cinematic {
         Some(camera) => camera,
         None => {
             let camera = spawn_camera(
@@ -268,7 +271,7 @@ fn begin_intro(portfolio: &mut PortfolioWorld, world: &mut World, level: u32) {
             if let Some(component) = world.core.get_camera_mut(camera) {
                 component.smoothing = None;
             }
-            portfolio.resources.game.cutscene_camera = Some(camera);
+            portfolio.resources.cameras.cinematic = Some(camera);
             camera
         }
     };
@@ -277,9 +280,9 @@ fn begin_intro(portfolio: &mut PortfolioWorld, world: &mut World, level: u32) {
 
     let field_of_view = portfolio
         .resources
-        .game
-        .orbit_camera
-        .and_then(|orbit| world.core.get_camera(orbit))
+        .cameras
+        .player
+        .and_then(|player| world.core.get_camera(player))
         .and_then(|component| match &component.projection {
             Projection::Perspective(perspective) => Some(perspective.y_fov_rad.to_degrees()),
             _ => None,
@@ -341,22 +344,22 @@ fn level_caption(level: u32) -> &'static str {
     }
 }
 
-/// Hands control back to the orbit camera, snapped to the cutscene's final
+/// Hands control back to the player camera, snapped to the cutscene's final
 /// pose so nothing jumps.
 fn finish_intro(portfolio: &mut PortfolioWorld, world: &mut World) {
-    if let Some(camera) = portfolio.resources.game.orbit_camera {
-        if let Some(orbit) = world.core.get_pan_orbit_camera_mut(camera) {
-            orbit.focus = aim_focus();
-            orbit.yaw = AIM_YAW;
-            orbit.pitch = AIM_PITCH;
-            orbit.radius = AIM_RADIUS;
-            orbit.target_focus = aim_focus();
-            orbit.target_yaw = AIM_YAW;
-            orbit.target_pitch = AIM_PITCH;
-            orbit.target_radius = AIM_RADIUS;
-        }
-        world.resources.active_camera = Some(camera);
+    if let Some(camera) = portfolio.resources.cameras.player
+        && let Some(orbit) = world.core.get_pan_orbit_camera_mut(camera)
+    {
+        orbit.focus = aim_focus();
+        orbit.yaw = AIM_YAW;
+        orbit.pitch = AIM_PITCH;
+        orbit.radius = AIM_RADIUS;
+        orbit.target_focus = aim_focus();
+        orbit.target_yaw = AIM_YAW;
+        orbit.target_pitch = AIM_PITCH;
+        orbit.target_radius = AIM_RADIUS;
     }
+    restore_player_camera(portfolio, world);
     portfolio.resources.game.phase = GamePhase::Playing;
     portfolio.resources.game.dirty = true;
 }
@@ -416,13 +419,9 @@ fn fire(portfolio: &mut PortfolioWorld, world: &mut World, x: f32, y: f32) {
 
 fn exit(portfolio: &mut PortfolioWorld, world: &mut World) {
     stop_cutscene(world);
-    if let Some(camera) = portfolio.resources.game.orbit_camera {
-        world.resources.active_camera = Some(camera);
-    }
-    if let Some(camera) = portfolio.resources.game.cutscene_camera
-        && world.core.entity_has_components(camera, LOCAL_TRANSFORM)
-    {
-        despawn_recursive_immediate(world, camera);
+    restore_player_camera(portfolio, world);
+    if let Some(camera) = portfolio.resources.cameras.cinematic.take() {
+        despawn(world, camera);
     }
     clear_arena(portfolio, world);
     world.resources.physics.enabled = false;
