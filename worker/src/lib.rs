@@ -113,6 +113,15 @@ fn apply_client_message(world: &mut World, portfolio: &mut Portfolio, message: C
         ClientMessage::Scroll { progress } => {
             portfolio.portfolio.resources.tour.target_progress = progress.clamp(0.0, 1.0);
         }
+        ClientMessage::Orbit { yaw, pitch, zoom } => {
+            if let Some(camera) = world.resources.active_camera
+                && let Some(orbit) = world.core.get_pan_orbit_camera_mut(camera)
+            {
+                orbit.target_yaw += yaw;
+                orbit.target_pitch = (orbit.target_pitch + pitch).clamp(-1.4, 1.4);
+                orbit.target_radius = (orbit.target_radius * (1.0 + zoom)).clamp(8.0, 60.0);
+            }
+        }
         ClientMessage::Glance { x, y } => {
             portfolio.portfolio.resources.tour.glance =
                 Vec2::new(x.clamp(-1.0, 1.0), y.clamp(-1.0, 1.0));

@@ -80,3 +80,16 @@ body {
 .game-hit {
   animation: game-hit 1.6s ease-out forwards;
 }
+
+.pad-nav :is(a, button, input):focus {
+  outline: 2px solid rgba(167, 139, 250, 0.9);
+  outline-offset: 2px;
+}
+
+.gp-crosshair {
+  display: none;
+}
+
+.pad-nav .gp-crosshair {
+  display: flex;
+}

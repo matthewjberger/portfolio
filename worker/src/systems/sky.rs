@@ -6,7 +6,7 @@ use nightshade::prelude::{ehttp, serde_json, *};
 use serde::Deserialize;
 
 const HDRI_FILES: &str = "https://api.polyhaven.com/files/";
-const SKYBOX: &str = "kloofendal_48d_partly_cloudy_puresky";
+const SKYBOX: &str = "simons_town_rocks";
 const RESOLUTION: u32 = 4;
 
 #[derive(Deserialize)]

@@ -22,6 +22,7 @@ pub fn App() -> impl IntoView {
     let bridge = StoredValue::new_local(None::<Bridge>);
 
     let _ = window_event_listener(leptos::ev::scroll, move |_| update_scroll_spy(state));
+    crate::gamepad::start(bridge, state);
 
     let content_class = move || {
         if state.game_phase.get() == GamePhase::Idle {

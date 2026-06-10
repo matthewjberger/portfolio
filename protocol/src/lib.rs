@@ -105,6 +105,13 @@ pub enum ClientMessage {
     Scroll {
         progress: f32,
     },
+    /// Per-frame gamepad camera deltas while the game is active: yaw and
+    /// pitch in radians, zoom as a relative radius factor.
+    Orbit {
+        yaw: f32,
+        pitch: f32,
+        zoom: f32,
+    },
     /// Normalized pointer position in -1..1 (x right, y up), drives the
     /// parallax glance and the floater nudge ray.
     Glance {

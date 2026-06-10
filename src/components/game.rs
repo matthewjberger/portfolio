@@ -43,7 +43,7 @@ fn GameIntro(state: PortfolioState) -> impl IntoView {
         <Show when=move || state.game_phase.get() == GamePhase::Intro fallback=|| ()>
             <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
                 <span class="px-3 py-1.5 rounded-full border border-white/10 bg-[#14161d]/85 backdrop-blur-md text-[11px] text-white/60">
-                    "Click to skip"
+                    "Click or press A to skip"
                 </span>
             </div>
         </Show>
@@ -65,7 +65,7 @@ fn GameMenu(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
     view! {
         <Show when=open fallback=|| ()>
             <div class="fixed inset-0 z-40 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-                <div class=format!("{PANEL} w-full max-w-[560px] p-6 sm:p-8")>
+                <div data-pad-overlay="" class=format!("{PANEL} w-full max-w-[560px] p-6 sm:p-8")>
                     <div class="flex items-start justify-between">
                         <div>
                             <h1 class="text-[22px] font-bold tracking-[0.2em] text-white">
@@ -76,6 +76,7 @@ fn GameMenu(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
                             </p>
                         </div>
                         <button
+                            data-pad-cancel=""
                             class="text-white/40 hover:text-white/90 text-[16px] leading-none pl-3"
                             title="Back to the portfolio"
                             on:click=close
@@ -229,8 +230,11 @@ fn GameHud(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
                     <span class="text-[12px] text-white/60 tabular-nums whitespace-nowrap">{targets}</span>
                 </div>
                 <span class="text-[11px] text-white/35">
-                    "Drag to orbit · Scroll to zoom · Click to fire"
+                    "Drag or stick to orbit · Scroll to zoom · Click or RT to fire"
                 </span>
+            </div>
+            <div class="gp-crosshair fixed inset-0 z-20 items-center justify-center pointer-events-none">
+                <span class="w-3 h-3 rounded-full border-2 border-white/70 shadow shadow-black/60"></span>
             </div>
             <div class="fixed top-[38%] left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 pointer-events-none">
                 <For
@@ -299,7 +303,7 @@ fn GameEnd(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
     view! {
         <Show when=ended fallback=|| ()>
             <div class="fixed inset-0 z-40 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-                <div class=format!("{PANEL} w-full max-w-[400px] p-7 text-center")>
+                <div data-pad-overlay="" class=format!("{PANEL} w-full max-w-[400px] p-7 text-center")>
                     <Show
                         when=cleared
                         fallback=move || {
@@ -356,6 +360,7 @@ fn GameEnd(bridge: BridgeSlot, state: PortfolioState) -> impl IntoView {
                             {move || if cleared() { "Replay" } else { "Retry" }}
                         </button>
                         <button
+                            data-pad-cancel=""
                             class=format!("{ACTION} bg-white/5 hover:bg-white/15 text-white/70")
                             on:click=menu
                         >
