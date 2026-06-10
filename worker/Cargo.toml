@@ -8,7 +8,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 protocol = { path = "../protocol" }
-nightshade = { version = "0.32", features = ["debug_render", "gizmos", "physics"] }
+nightshade = { version = "0.33", features = ["debug_render", "gizmos", "physics"] }
 serde = { version = "1", features = ["derive"] }
 wasm-bindgen = "=0.2.115"
 wasm-bindgen-futures = "0.4"
